@@ -21,7 +21,8 @@ A simple To Do react native app
 
 
 Bibliotecas utilizadas:
-@react-native-async-storage/async-storage. -> para guardar la informacion en el dispositivo \n
+@react-native-async-storage/async-storage. -> para guardar la informacion en el dispositivo
+
 @react-native-community/checkbox.          -> para el checkmark en las tareas completadas
 @react-native-community/datetimepicker.    -> seleccionador de fechas o tiempo
 @react-navigation/*                        -> para la navegacion de la app
