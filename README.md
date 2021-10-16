@@ -20,6 +20,8 @@ A simple To Do react native app
 
 
 
+
+
 Bibliotecas utilizadas:
 
 @react-native-async-storage/async-storage. -> para guardar la informacion en el dispositivo
