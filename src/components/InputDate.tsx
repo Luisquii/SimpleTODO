@@ -4,7 +4,8 @@ import { Text, TextInput, View, StyleSheet, Keyboard, TouchableOpacity, Platform
 import BottomSheet from 'reanimated-bottom-sheet';
 import { Portal } from 'react-native-paper-portal';
 import DateTimePicker from "@react-native-community/datetimepicker";
-
+import Ionicons from "react-native-vector-icons/Ionicons"
+import Feather from "react-native-vector-icons/Feather"
 interface InputDateProps {
     title: string;
     placeholder: string;
@@ -105,24 +106,35 @@ export const InputDate: React.FC<InputDateProps> = ({
             <View style={styles.container}>
                 <Text style={styles.title}>{title}</Text>
 
-                <TextInput
-                    placeholder={placeholder}
-                    placeholderTextColor="#989a9c"
-                    value={
-                        mode === "date" ?
-                            placeHolderDate ? placeHolderDate : undefined
-                            :
-                            mode === "time" &&
+                <View style={styles.inputContainer}>
+
+                    <TextInput
+                        placeholder={placeholder}
+                        placeholderTextColor="#989a9c"
+                        value={
+                            mode === "date" ?
                                 placeHolderDate ? placeHolderDate : undefined
+                                :
+                                mode === "time" &&
+                                    placeHolderDate ? placeHolderDate : undefined
+                        }
+                        onChangeText={(t: string) => onTextChange(t)}
+                        style={[styles.input]}
+                        onFocus={() => {
+                            Keyboard.dismiss()
+                            bottomSheetRef.current.snapTo(0)
+                        }}
+                        showSoftInputOnFocus={false}
+
+                    />
+                    {
+                        mode === "time" && <Ionicons style={{ alignSelf: "center", marginRight: 3 }} name="time-outline" size={20} color="#000" />
                     }
-                    onChangeText={(t: string) => onTextChange(t)}
-                    style={[styles.input]}
-                    onFocus={() => {
-                        Keyboard.dismiss()
-                        bottomSheetRef.current.snapTo(0)
-                    }}
-                    showSoftInputOnFocus={false}
-                />
+                    {
+                        mode === "date" && <Feather style={{ alignSelf: "center", marginRight: 3 }} name="calendar" size={20} color="#000" />
+                    }
+
+                </View>
             </View>
 
             <Portal >
@@ -156,7 +168,6 @@ const styles = StyleSheet.create({
     input: {
         // flex: 1,
         height: 50,
-
         borderRadius: 15,
         backgroundColor: "#e6e6e6",
         padding: 10
@@ -175,4 +186,10 @@ const styles = StyleSheet.create({
     panelHeader: {
         alignItems: 'center',
     },
+    inputContainer: {
+        flexDirection: 'row',
+        backgroundColor: "#e6e6e6",
+        borderRadius: 15,
+        justifyContent: "space-between"
+    }
 });
